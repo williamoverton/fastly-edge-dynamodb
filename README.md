@@ -2,4 +2,4 @@
 
 URL: https://edge-polls.edgecompute.app/
 
-This is an example and by no means intended to ba a tutorial! Use any code here at your own risk.
+This is an example and by no means intended to be a tutorial! Use any code here at your own risk.
