@@ -1,0 +1,6 @@
+version = 145
+name = "testing-dynamodb"
+description = "I will give up on this far before it becomes useful"
+authors = ["william.overton@dunelm.com"]
+language = "assemblyscript"
+service_id = "1iglxd0A8T3AHjrjTvfmST"
