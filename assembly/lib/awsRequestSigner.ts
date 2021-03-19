@@ -2,7 +2,7 @@ import * as SHA256 from "./vendor/sha256"
 import { Bitray } from 'as-bitray'
 import { Date as ADate } from "as-date"
 import { Console, Date } from "as-wasi";
-import { hmac as _hmac, _hashUpdate, _hashFinal, hashInit, setU8 } from "../../node_modules/wasm-crypto/assembly/crypto"
+import { setU8 } from "../../node_modules/wasm-crypto/assembly/crypto"
 import { Headers } from "@fastly/as-compute";
 
 export default class RequestSigner {

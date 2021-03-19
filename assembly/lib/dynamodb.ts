@@ -2,6 +2,7 @@ import { Console } from "as-wasi";
 import RequestSigner from "./awsRequestSigner"
 import { Request, Response, Fastly, RequestInit, Headers } from "@fastly/as-compute";
 import { Bitray } from "as-bitray";
+import { JSONEncoder } from "assemblyscript-json"; 
 
 export class DynamoClient {
     backend: string
@@ -19,13 +20,23 @@ export class DynamoClient {
 
     get(table: string, pk: string, sk: string): string {
 
-        const body = `{
-    "TableName": "` + table + `",
-    "Key": {
-        "pk": {"S": "` + pk + `"},
-        "sk": {"S": "` + (<string>sk) + `"}
-    }
-}`
+        let encoder = new JSONEncoder();
+
+        encoder.setString("TableName", table)
+
+        encoder.pushObject("Key")
+
+        encoder.pushObject("pk")
+        encoder.setString("S", pk)
+        encoder.popObject();
+
+        encoder.pushObject("sk")
+        encoder.setString("S", sk)
+        encoder.popObject();
+
+        encoder.popObject();
+
+        const body = "{" + encoder.toString() + "}"
 
         const authHeaders = this.signer.signRequest("/", "DynamoDB_20120810.GetItem", body)
 
@@ -77,9 +88,11 @@ export class DynamoClient {
     
     scan(table: string): string {
 
-        const body = `{
-    "TableName": "` + table + `"
-}`
+        let encoder = new JSONEncoder();
+
+        encoder.setString("TableName", table)
+
+        const body = "{" + encoder.toString() + "}"
 
         const authHeaders = this.signer.signRequest("/", "DynamoDB_20120810.Scan", body)
 

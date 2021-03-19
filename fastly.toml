@@ -1,4 +1,4 @@
-version = 145
+version = 148
 name = "testing-dynamodb"
 description = "I will give up on this far before it becomes useful"
 authors = ["william.overton@dunelm.com"]
